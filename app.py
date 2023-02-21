@@ -95,14 +95,14 @@ def delete_item(item_id):
     except KeyError:
         abort(404, message="Item not found.")
 
-@app2.put("/item/<string:item_id>") #MAKE SURE TO COPY THE ITEM ID INTO THE GET ITEM REQUEST, NOT STORE ID!!!!!
+@app2.put("/item/<string:item_id>") 
 def update_item(item_id): #problem point
     item_data = request.get_json() #input value
     if "price" not in item_data or "name" not in item_data: #we require name and price as keys in the put request
         abort(400, message="must include name and price keys in insomnia request")
     
     try:
-        item = items[item_id] #items dictionary + item_data key = value #YOU HAD ITEMS_DATA instead of item_id
+        item = items[item_id] #items dictionary + item_data key = value 
         item |= item_data #merging dictionaries - item_data dictinonary replaces item dictionary
         
         return item 
