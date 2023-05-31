@@ -1,6 +1,6 @@
-import uuid #generates unique identifiers
+import uuid #generates unique identifiers - useful for database records and can be used as primary key in db. 
 from flask import request #request object from Flask allows accessing info about current HTTP request
-from flask.views import MethodView #MethodView is a class for defining class-based views in Flask
+from flask.views import MethodView #MethodView is a class for defining class-based views in Flask - let's you group related methods into a single class
 from flask_smorest import Blueprint, abort #Blueprint class and abort function from flask_smorest extension. Blueprint defines reusable and modular routes. abort returns error responses in restful api.
 from db import stores #imports stores object from db module. seperate db.py file contains store data
 blb = Blueprint("stores", __name__, description = "Operations on stores") #blb is instance of Blueprint class created with name "stores" and a description. Used to define routes for operations related to store.
@@ -17,4 +17,4 @@ class Store(MethodView): #class based view named Store, which subclasses MethodV
             del stores[store_id]
             return {"message": "Store deleted."}
         except KeyError: #keyerror meaning store not found, so return 404 like above. 
-            abort(404, message="Store not found.")
+            abort(404, message="Store not found.") #the reason abort is used is because it provides standarized error responses, and it stops execution of view function. This improves app efficiency. 
