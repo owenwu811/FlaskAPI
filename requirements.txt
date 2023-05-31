@@ -1,4 +1,4 @@
-#dependencies 
+#dependencies and libraries application needs 
 python-dotenv
 flask
 flask-smorest
