@@ -1,7 +1,7 @@
-import uuid 
-from flask import Flask, request
-from flask_smorest import abort 
-from db import items, stores
+import uuid #generate unique identifiers
+from flask import Flask, request #request object used to access data sent in form
+from flask_smorest import abort #abort for specific status codes within flask_smorest extension
+from db import items, stores #imports items and stores dictionaries from db module
 
 app2 = Flask(__name__)
 
@@ -26,7 +26,7 @@ def create_store(): # POST - CREATE STORE
         message="ensure name is included in the insomnia request." 
         
     )
-    for store in stores.values(): #if store is already in the stores dictionary, it would be a duplicate
+    for store in stores.values(): #if store is already in the stores dictionary as a value, it would be a duplicate
         if store["name"] in stores:
             abort(400, message=f"store already exists")
 
