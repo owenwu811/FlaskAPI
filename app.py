@@ -42,8 +42,8 @@ def create_store(): # POST - CREATE STORE
 @app2.delete("/store/<string:store_id>")
 def delete_store(store_id):
     try:
-        del stores[store_id]
-        return {"message": "Store deleted."}
+        del stores[store_id] #we are deleting the key, value pair from the dictionary
+        return {"message": "Store deleted."} #returning user message
     except KeyError:
         abort(404, message="Store not found. ")
 
@@ -51,7 +51,7 @@ def delete_store(store_id):
 
 @app2.post("/item") #rename endpoint because we are not creating items in a store
 def create_item(): 
-    item_data = request.get_json()
+    item_data = request.get_json() #get request
     if (
         "price" not in item_data #we are making sure that either price, store_id, or name must
         #be included as a key in the insomnia request to be able to search in the item_data dictionary
@@ -62,7 +62,7 @@ def create_item():
             400,
             message="Bad request. Ensure 'price' 'store_id', and 'name' are incuded in the json payload."
         )
-    for item in items.values():
+    for item in items.values(): #looping through key, value pair in dictionary
         if (
             item_data["name"] == item["name"]
             and item_data["store_id"] == item["store_id"]
