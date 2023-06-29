@@ -44,7 +44,7 @@ def delete_store(store_id):
     try:
         del stores[store_id] #we are deleting the key, value pair from the dictionary
         return {"message": "Store deleted."} #returning user message
-    except KeyError:
+    except KeyError: #error handling
         abort(404, message="Store not found. ")
 
 
@@ -67,7 +67,7 @@ def create_item():
             item_data["name"] == item["name"]
             and item_data["store_id"] == item["store_id"]
         ):
-            abort(400, message=f"Item already exists.")
+            abort(400, message=f"Item already exists.") #won't let you add duplicate item into the dictionary 
     if item_data["store_id"] not in stores: #checks dictionary to make sure store_id matches the request
         abort(404, message="Store not found.")
        
@@ -100,11 +100,9 @@ def update_item(item_id): #problem point
     item_data = request.get_json() #input value
     if "price" not in item_data or "name" not in item_data: #we require name and price as keys in the put request
         abort(400, message="must include name and price keys in insomnia request")
-    
-    try:
+    try: #price or name - atleast one of the two - does exist in the item_data request payload
         item = items[item_id] #items dictionary + item_data key = value 
-        item |= item_data #merging dictionaries - item_data dictinonary replaces item dictionary
-        
+        item |= item_data #merging dictionaries - item_data dictinonary replaces item dictionary    
         return item 
     except KeyError:
         abort(404, message="Item not found")
