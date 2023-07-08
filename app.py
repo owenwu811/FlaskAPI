@@ -90,6 +90,7 @@ def get_item(item_id): #we are getting item from the items dictionary
 @app2.delete("/item/<string:item_id>") #issue
 def delete_item(item_id): 
     try:
+        #deleting the key, value pair in the items dictionary using item_id key to find the corresponding value
         del items[item_id]
         return {"message": "Item deleted."}
     except KeyError:
