@@ -32,10 +32,10 @@ def create_store(): # POST - CREATE STORE
 
 
     store_id = uuid.uuid4().hex #creates the item id
-#    #unpacks values in store_data dictionary in the request and includes in new dictionary 
+    #unpacks values in store_data dictionary in the request and includes in new dictionary 
     
     store = {**store_data, "id": store_id} #passing keyword arguments to constructor
-#    #id is a seperate key within this dictionary 
+    #id is a seperate key within this dictionary 
     stores[store_id] = store
     return store, 201 #200 is the default status code for ok while 201 means we have accepted the data into our store
 
@@ -60,7 +60,7 @@ def create_item():
     ):    #we are adding error handling to make the message more meaningful
         abort (
             400,
-            message="Bad request. Ensure 'price' 'store_id', and 'name' are incuded in the json payload."
+            message="Bad request. Ensure 'price', 'store_id', and 'name' are incuded in the json payload."
         )
     for item in items.values(): #looping through key, value pair in dictionary
         if (
