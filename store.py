@@ -8,13 +8,13 @@ blb = Blueprint("stores", __name__, description = "Operations on stores") #blb i
 class Store(MethodView): #class based view named Store, which subclasses MethodView.
     def get(self, store_id): #get method - executed when http get is sent to route. retrieves store data from stores object using provided store_id. 
         try: #if store is found, return as response. 
-            return stores[store_id]
+            return stores[store_id] 
         except KeyError: #if store is not found, aka keyerror, 404 error is raised using custom error message.
             abort(404, message="Store not found.")
     def delete(self, store_id): #delete method - HTTP Delete request made to specified route. 
         #attempts to delete store data from stores object using store_id. 
         try: #store deleted successfully as id was a match - returns message key
-            del stores[store_id]
+            del stores[store_id] #deleting the key value, pair in the stores dictionary
             return {"message": "Store deleted."}
         except KeyError: #keyerror meaning store not found, so return 404 like above. 
             abort(404, message="Store not found.") #the reason abort is used is because it provides standarized error responses, and it stops execution of view function. This improves app efficiency. 
