@@ -4,4 +4,4 @@ WORKDIR /app2                                     #sets workdir inside container
 COPY requirements.txt .                           #copies from host to container's directory
 RUN pip3 install -r requirements.txt               #pip inside container to install app dependencies specified in requirements.txt
 COPY . .                                          #copies entire app code from host machine to current directory in container
-CMD ["flask", "run", "--host", "0.0.0.0"]         #command that will be executed when container starts. uses flask run to run flask app inside container and specifies 0.0.0.0/0 to allow all connections.
+CMD ["python3 -m venv .venv", "flask", "run", "--host", "0.0.0.0"]         #command that will be executed when container starts. uses flask run to run flask app inside container and specifies 0.0.0.0/0 to allow all connections.
