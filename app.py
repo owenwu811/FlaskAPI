@@ -1,4 +1,4 @@
-import uuid #generate unique identifiers
+import uuid #module to generate unique identifiers
 from flask import Flask, request #request object used to access data sent in form
 from flask_smorest import abort #abort for specific status codes within flask_smorest extension
 from db import items, stores #imports items and stores dictionaries from db module
