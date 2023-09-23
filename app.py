@@ -1,7 +1,7 @@
 import uuid #module to generate unique identifiers
 from flask import Flask, request #request object used to access data sent in form
 from flask_smorest import abort #abort for specific status codes within flask_smorest extension
-from db import items, stores #imports items and stores dictionaries from db module
+from db import items, stores #imports items and stores dictionaries from db.py
 
 app2 = Flask(__name__)
 
@@ -9,7 +9,7 @@ app2 = Flask(__name__)
 def get_stores():
     return {"stores": list(stores.values())}
 
-@app2.get("/store/<string:store_id>") #/store is the endpoint #GET - READ STORE
+@app2.get("/store/<string:store_id>") #/store is the endpoint #GET REQUEST - READ STORE
 def get_store(store_id): #won't return information about items
     try:
         return stores[store_id] #accesses the specific store with 
@@ -62,7 +62,7 @@ def create_item():
             400,
             message="Bad request. Ensure 'price', 'store_id', and 'name' are incuded in the json payload."
         )
-    for item in items.values(): #looping through key, value pair in dictionary
+    for item in items.values(): #looping through key, value pair in dictionary 
         if (
             item_data["name"] == item["name"]
             and item_data["store_id"] == item["store_id"]
