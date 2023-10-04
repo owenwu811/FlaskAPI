@@ -23,14 +23,11 @@ def create_store(): # POST - CREATE STORE
     if "name" not in store_data: #must make sure that name is inside of the insomnia request as a key
         abort(
         400,
-        message="ensure name is included in the insomnia request." 
-        
+        message="ensure name is included in the insomnia request."         
     )
     for store in stores.values(): #if store is already in the stores dictionary as a value, it would be a duplicate
         if store["name"] in stores:
             abort(400, message=f"store already exists")
-
-
     store_id = uuid.uuid4().hex #creates the item id
     #unpacks values in store_data dictionary in the request and includes in new dictionary 
     
@@ -46,8 +43,6 @@ def delete_store(store_id):
         return {"message": "Store deleted."} #returning user message
     except KeyError: #error handling
         abort(404, message="Store not found. ")
-
-
 
 @app2.post("/item") #rename endpoint because we are not creating items in a store
 def create_item(): 
@@ -73,7 +68,7 @@ def create_item():
        
     item_id = uuid.uuid4().hex #creates item_id
     item = {**item_data, "id": item_id} #saves item_id to dictionary
-    items[item_id] = item #places the item into our items dictionary
+    items[item_id] = item 
     return item, 201
 
 
